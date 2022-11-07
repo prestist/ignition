@@ -3,8 +3,8 @@ module github.com/coreos/ignition/v2
 go 1.17
 
 require (
-	cloud.google.com/go/compute/metadata v0.1.0
-	cloud.google.com/go/storage v1.27.0
+	cloud.google.com/go/compute/metadata v0.2.1
+	cloud.google.com/go/storage v1.28.0
 	github.com/aws/aws-sdk-go v1.44.126
 	github.com/beevik/etree v1.1.1-0.20200718192613-4a2f8b9d084c
 	github.com/coreos/go-semver v0.3.0
@@ -20,13 +20,13 @@ require (
 	golang.org/x/net v0.0.0-20221014081412-f15817d10f9b
 	golang.org/x/oauth2 v0.0.0-20221014153046-6fdb5e3db783
 	golang.org/x/sys v0.0.0-20220728004956-3c1f35247d10
-	google.golang.org/api v0.101.0
+	google.golang.org/api v0.102.0
 )
 
 require (
 	cloud.google.com/go v0.104.0 // indirect
 	cloud.google.com/go/compute v1.12.1 // indirect
-	cloud.google.com/go/iam v0.3.0 // indirect
+	cloud.google.com/go/iam v0.5.0 // indirect
 	github.com/coreos/go-json v0.0.0-20220810161552-7cce03887f34 // indirect
 	github.com/davecgh/go-spew v1.1.1 // indirect
 	github.com/godbus/dbus/v5 v5.0.4 // indirect
