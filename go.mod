@@ -1,7 +1,7 @@
 module github.com/coreos/ignition/v2
 
 go 1.22.0
-toolchain go1.23.6
+toolchain go1.24.1
 
 require (
 	cloud.google.com/go/compute/metadata v0.6.0
@@ -9,7 +9,7 @@ require (
 	github.com/Azure/azure-sdk-for-go/sdk/azidentity v1.8.2
 	github.com/Azure/azure-sdk-for-go/sdk/storage/azblob v1.6.0
 	github.com/aws/aws-sdk-go v1.55.6
-	github.com/beevik/etree v1.5.0
+	github.com/beevik/etree v1.5.1
 	github.com/containers/libhvee v0.10.0
 	github.com/coreos/go-semver v0.3.1
 	github.com/coreos/go-systemd/v22 v22.5.0
