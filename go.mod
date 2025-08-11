@@ -1,6 +1,7 @@
 module github.com/coreos/ignition/v2
 
-go 1.22.0
+go 1.23.0
+
 toolchain go1.23.6
 
 require (
@@ -23,9 +24,9 @@ require (
 	github.com/stretchr/testify v1.10.0
 	github.com/vincent-petithory/dataurl v1.0.0
 	github.com/vmware/vmw-guestinfo v0.0.0-20220317130741-510905f0efa3
-	golang.org/x/net v0.37.0
+	golang.org/x/net v0.43.0
 	golang.org/x/oauth2 v0.28.0
-	golang.org/x/sys v0.31.0
+	golang.org/x/sys v0.35.0
 	google.golang.org/api v0.224.0
 	gopkg.in/yaml.v3 v3.0.1
 )
@@ -75,9 +76,9 @@ require (
 	go.opentelemetry.io/otel/sdk v1.34.0 // indirect
 	go.opentelemetry.io/otel/sdk/metric v1.32.0 // indirect
 	go.opentelemetry.io/otel/trace v1.34.0 // indirect
-	golang.org/x/crypto v0.36.0 // indirect
-	golang.org/x/sync v0.12.0 // indirect
-	golang.org/x/text v0.23.0 // indirect
+	golang.org/x/crypto v0.41.0 // indirect
+	golang.org/x/sync v0.16.0 // indirect
+	golang.org/x/text v0.28.0 // indirect
 	golang.org/x/time v0.10.0 // indirect
 	google.golang.org/genproto v0.0.0-20241118233622-e639e219e697 // indirect
 	google.golang.org/genproto/googleapis/api v0.0.0-20241209162323-e6fa225c2576 // indirect
