@@ -1,6 +1,7 @@
 module github.com/coreos/ignition/v2
 
-go 1.22.0
+go 1.23.0
+
 toolchain go1.23.6
 
 require (
@@ -20,7 +21,7 @@ require (
 	github.com/mitchellh/copystructure v1.2.0
 	github.com/pin/tftp v2.1.0+incompatible
 	github.com/spf13/pflag v1.0.6
-	github.com/stretchr/testify v1.10.0
+	github.com/stretchr/testify v1.11.0
 	github.com/vincent-petithory/dataurl v1.0.0
 	github.com/vmware/vmw-guestinfo v0.0.0-20220317130741-510905f0efa3
 	golang.org/x/net v0.37.0
