@@ -1,6 +1,6 @@
 module github.com/coreos/ignition/v2
 
-go 1.23.0
+go 1.24.0
 
 toolchain go1.24.1
 
@@ -29,7 +29,7 @@ require (
 	github.com/vincent-petithory/dataurl v1.0.0
 	github.com/vmware/vmw-guestinfo v0.0.0-20220317130741-510905f0efa3
 	golang.org/x/net v0.42.0
-	golang.org/x/oauth2 v0.30.0
+	golang.org/x/oauth2 v0.31.0
 	golang.org/x/sys v0.34.0
 	google.golang.org/api v0.243.0
 	gopkg.in/yaml.v3 v3.0.1
