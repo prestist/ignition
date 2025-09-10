@@ -14,7 +14,7 @@ require (
 	github.com/aws/aws-sdk-go-v2/feature/ec2/imds v1.18.5
 	github.com/aws/aws-sdk-go-v2/feature/s3/manager v1.19.2
 	github.com/aws/aws-sdk-go-v2/service/s3 v1.87.2
-	github.com/beevik/etree v1.5.1
+	github.com/beevik/etree v1.6.0
 	github.com/containers/libhvee v0.10.0
 	github.com/coreos/go-semver v0.3.1
 	github.com/coreos/go-systemd/v22 v22.5.0
