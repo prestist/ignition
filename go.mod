@@ -18,6 +18,7 @@ require (
 	github.com/containers/libhvee v0.10.0
 	github.com/coreos/go-semver v0.3.1
 	github.com/coreos/go-systemd/v22 v22.6.0
+	github.com/coreos/ignition/v2/butane v0.0.0-00010101000000-000000000000
 	github.com/coreos/vcontext v0.0.0-20230201181013-d72178a18687
 	github.com/google/renameio/v2 v2.0.1
 	github.com/google/uuid v1.6.0
@@ -58,6 +59,7 @@ require (
 	github.com/aws/aws-sdk-go-v2/service/internal/s3shared v1.19.16 // indirect
 	github.com/aws/smithy-go v1.24.0 // indirect
 	github.com/cespare/xxhash/v2 v2.3.0 // indirect
+	github.com/clarketm/json v1.17.1 // indirect
 	github.com/cncf/xds/go v0.0.0-20251022180443-0feb69152e9f // indirect
 	github.com/coreos/go-json v0.0.0-20230131223807-18775e0fb4fb // indirect
 	github.com/davecgh/go-spew v1.1.2-0.20180830191138-d8f796af33cc // indirect
@@ -98,3 +100,6 @@ require (
 	google.golang.org/grpc v1.77.0 // indirect
 	google.golang.org/protobuf v1.36.10 // indirect
 )
+
+// Use local butane code instead of external dependency
+replace github.com/coreos/ignition/v2/butane => ./butane

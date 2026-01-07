@@ -27,6 +27,8 @@ import (
 	v3_4 "github.com/coreos/ignition/v2/config/v3_4/types"
 	v3_5 "github.com/coreos/ignition/v2/config/v3_5/types"
 	v3_6 "github.com/coreos/ignition/v2/config/v3_6_experimental/types"
+
+	"github.com/stretchr/testify/assert"
 )
 
 type typeSet map[reflect.Type]struct{}
@@ -285,5 +287,111 @@ func TestConfigStructure(t *testing.T) {
 		} else if err := checkNonKeyedStructFields(configType, keyedStructs); err != nil {
 			t.Errorf("Type %s/%s was invalid: %v", configType.PkgPath(), configType.Name(), err)
 		}
+	}
+}
+
+// TestButaneYAMLParsing tests that the config parser can detect and transpile
+// Butane YAML configs to Ignition JSON
+func TestButaneYAMLParsing(t *testing.T) {
+	// Simple Butane YAML config
+	butaneYAML := []byte(`variant: fcos
+version: 1.5.0
+passwd:
+  users:
+    - name: core
+      ssh_authorized_keys:
+        - ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQC... user@example.com
+`)
+
+	// Parse the Butane YAML
+	cfg, rpt, err := Parse(butaneYAML)
+
+	// Should not error
+	assert.NoError(t, err, "Failed to parse Butane YAML config")
+	assert.False(t, rpt.IsFatal(), "Parse report was fatal: %v", rpt)
+
+	// Verify the resulting config has the expected user
+	assert.Equal(t, 1, len(cfg.Passwd.Users), "Expected 1 user in parsed config")
+	assert.Equal(t, "core", cfg.Passwd.Users[0].Name, "Expected user name to be 'core'")
+	assert.Equal(t, 1, len(cfg.Passwd.Users[0].SSHAuthorizedKeys), "Expected 1 SSH key")
+}
+
+// TestIgnitionJSONParsing tests that the parser still correctly handles
+// Ignition JSON configs (backward compatibility)
+func TestIgnitionJSONParsing(t *testing.T) {
+	// Simple Ignition JSON config
+	ignitionJSON := []byte(`{
+  "ignition": {
+    "version": "3.4.0"
+  },
+  "passwd": {
+    "users": [
+      {
+        "name": "core",
+        "sshAuthorizedKeys": [
+          "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQC... user@example.com"
+        ]
+      }
+    ]
+  }
+}`)
+
+	// Parse the Ignition JSON
+	cfg, rpt, err := Parse(ignitionJSON)
+
+	// Should not error
+	assert.NoError(t, err, "Failed to parse Ignition JSON config")
+	assert.False(t, rpt.IsFatal(), "Parse report was fatal: %v", rpt)
+
+	// Verify the resulting config has the expected user
+	assert.Equal(t, 1, len(cfg.Passwd.Users), "Expected 1 user in parsed config")
+	assert.Equal(t, "core", cfg.Passwd.Users[0].Name, "Expected user name to be 'core'")
+	assert.Equal(t, 1, len(cfg.Passwd.Users[0].SSHAuthorizedKeys), "Expected 1 SSH key")
+}
+
+// TestIsYAML tests the YAML detection function
+func TestIsYAML(t *testing.T) {
+	tests := []struct {
+		name     string
+		input    []byte
+		expected bool
+	}{
+		{
+			name:     "JSON config",
+			input:    []byte(`{"ignition": {"version": "3.4.0"}}`),
+			expected: false,
+		},
+		{
+			name:     "YAML config",
+			input:    []byte(`variant: fcos\nversion: 1.5.0`),
+			expected: true,
+		},
+		{
+			name:     "YAML with document separator",
+			input:    []byte(`---\nvariant: fcos\nversion: 1.5.0`),
+			expected: true,
+		},
+		{
+			name:     "JSON with leading whitespace",
+			input:    []byte(`  {"ignition": {"version": "3.4.0"}}`),
+			expected: false,
+		},
+		{
+			name:     "YAML with leading whitespace",
+			input:    []byte(`  variant: fcos\nversion: 1.5.0`),
+			expected: true,
+		},
+		{
+			name:     "Empty input",
+			input:    []byte(``),
+			expected: false,
+		},
+	}
+
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			result := isYAML(tt.input)
+			assert.Equal(t, tt.expected, result, "isYAML returned unexpected result")
+		})
 	}
 }
